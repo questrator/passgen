@@ -157,7 +157,6 @@ body {
 
 .options {
     display: flex;
-    flex-grow: 2;
 }
 
 [data-showed="0"] {
