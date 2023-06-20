@@ -8,6 +8,13 @@ body {
     height: 100vh;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #099cda;
+}
+
 .header {
     display: flex;
     align-items: center;
@@ -35,6 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1;
     min-height: 300px;
     background-color: #f1f1f1;
 }
@@ -147,10 +155,22 @@ body {
     background-image: url("../images/icon-copy.svg");
 }
 
+.options {
+    display: flex;
+    flex-grow: 2;
+}
+
 [data-showed="0"] {
     display: none;
 }
 
 [data-showed="1"] {
     display: flex;
+}
+
+
+
+.footer {
+    display: flex;
+    justify-content: center;
 }
