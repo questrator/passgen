@@ -82,7 +82,7 @@ body {
     height: 34px;
     border-radius: 17px;
     font-size: 0.9rem;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
   
 .mode-option[data-selected="0"] {
