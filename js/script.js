@@ -4,24 +4,32 @@ const config = {
     lower: "",
 };
 
-const modes = {
-    simple: document.querySelector(".mode-option[data-option='simple']"),
-    advanced: document.querySelector(".mode-option[data-option='advanced']")
-};
-
 const modesBlock = document.querySelector(".mode-options");
 modesBlock.addEventListener("click", modeSelectHandler);
 
 
 function init() {
-    console.log(config)
+    console.log(localStorage)
     const [selected, unselected] = getSelectedUnselected();
     setSelectedUnselected(selected, unselected);
 }
 
+function syncConfig() {
+    if (localStorage.length === 0) {
+        for (let key in config) {
+            localStorage.setItem(key, config[key]);
+        }
+    }
+    else {
+        for (let [key, value] of Object.entries(localStorage)) {
+            config[key] = value;
+        }
+    }
+}
+
 function getSelectedUnselected() {
-    const selected = document.querySelector(`.mode-option[data-option='${config.mode}']`);
-    const unselected = document.querySelector(`.mode-option[data-option='${config.mode === "simple" ? "advanced" : "simple"}']`);
+    const selected = document.querySelector(`.mode-option[data-option='${localStorage.getItem("mode")}']`);
+    const unselected = document.querySelector(`.mode-option[data-option='${localStorage.getItem("mode") === "simple" ? "advanced" : "simple"}']`);
     return [selected, unselected];
 }
 
@@ -34,8 +42,9 @@ function modeSelectHandler(event) {
     const [selected, unselected] = getSelectedUnselected();
     if (event.target === selected) return;
     setSelectedUnselected(selected, unselected);
-    config.mode = event.target.dataset.option;
+    localStorage.setItem("mode", event.target?.dataset.option);
     init();
 }
 
+syncConfig();
 init();
