@@ -146,3 +146,11 @@ body {
 .password-copy {
     background-image: url("../images/icon-copy.svg");
 }
+
+[data-showed="0"] {
+    display: none;
+}
+
+[data-showed="1"] {
+    display: flex;
+}

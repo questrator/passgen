@@ -1,7 +1,15 @@
 const config = {
+    version: "0.02",
     mode: "simple",
-    numbers: "0123456789",
-    lower: "",
+    totalLength: "8",
+    digits: "1",
+    digitsSymbols: "0123456789",
+    lower: "1",
+    lowerSymbols: "abcdefghijklmnopqrstuvwxyz",
+    upper: "0",
+    upperSymbols: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    specials: "0",
+    specialsSymbols: "!@#$%^&*()",
 };
 
 const modesBlock = document.querySelector(".mode-options");
@@ -15,9 +23,15 @@ function init() {
 }
 
 function syncConfig() {
-    if (localStorage.length === 0) {
+    if (localStorage.length === 0 || localStorage.version !== config.version) {
+        localStorage.clear();
         for (let key in config) {
             localStorage.setItem(key, config[key]);
+        }
+    }
+    if (localStorage.length !== config.length) {
+        for (let key in config) {
+            if (!localStorage[key]) localStorage.setItem(key, config[key]);
         }
     }
     else {
@@ -40,9 +54,9 @@ function setSelectedUnselected(selected, unselected) {
 
 function modeSelectHandler(event) {
     const [selected, unselected] = getSelectedUnselected();
-    if (event.target === selected) return;
+    if (event.target === selected || event.target === modesBlock) return;
     setSelectedUnselected(selected, unselected);
-    localStorage.setItem("mode", event.target?.dataset.option);
+    localStorage.setItem("mode", event.target.dataset.option);
     init();
 }
 
